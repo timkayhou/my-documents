@@ -8,6 +8,10 @@ mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :runa
 goto :eof
 :runas
 
+set srvice-name=MySQL80
+set start-message=The service %srvice-name% has been started.
+set stop-message=The service %srvice-name% has been stopped.
+set failed-message=The service %srvice-name% run failed.
+
 :: Run service or stop service
-set srvice-name="MySQL80" 
-sc start %srvice-name% || sc stop %srvice-name%
+sc start %srvice-name% && cls && msg %username% /Time:3 %start-message% || sc stop %srvice-name% && cls && msg %username% /Time:3 %stop-message% || cls && msg %username% %failed-message%
